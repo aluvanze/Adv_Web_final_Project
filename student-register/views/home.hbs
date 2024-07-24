@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <title>IST4035 Students</title>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body onload="fetchStudents()">
+        <h1>Student Register</h1>
+        <div>
+            <form>
+                <label>
+                    <span>Student id:</span>
+                    <input id="studentId" type="number" min="1" />
+                </label>
+
+                
+                <label>
+                    <span>Student name:</span>
+                    <input id="studentName" type="text" />
+                </label>
+                <label>
+                    <span> </span>
+                    <button>Add student</button>
+                </label>
+            </form>
+            
+            <table id="content">
+            </table>
+        </div>
+
+    </body>
+    <script src="js/main.js"></script>
+
+</html>
