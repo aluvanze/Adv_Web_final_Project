@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>School Timetable</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <h1>School Timetable</h1>
+  <% if (successMessage) { %>
+    <script>
+      alert("<%= successMessage %>");
+    </script>
+  <% } %>
+  <form action="/edit" method="POST">
+    <% for(let day in timetable) { %>
+      <h2><%= day %></h2>
+      <% for(let hour = 1; hour < timetable[day].length; hour++) { %>
+        <label for="<%= day %>-<%= hour %>"><%= hour %></label>
+        <input type="text" id="<%= day %>-<%= hour %>" name="<%= day %>[<%= hour %>]" value="<%= timetable[day][hour] %>">
+        <br>
+      <% } %>
+    <% } %>
+    <button type="submit">Save Timetable</button>
+    <input type="hidden" name="successMessage" value="Timetable saved successfully">
+  </form>
+  <form action="/generate" method="GET">
+    <button type="submit" id="gen">Generate Timetable</button>
+  </form>
+</body>
+</html>
