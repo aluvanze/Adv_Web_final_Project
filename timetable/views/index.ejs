@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>School Timetable</title>
-  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
   <h1>School Timetable</h1>
@@ -12,15 +12,41 @@
       alert("<%= successMessage %>");
     </script>
   <% } %>
-  <form action="/edit" method="POST">
-    <% for(let day in timetable) { %>
-      <h2><%= day %></h2>
-      <% for(let hour = 1; hour < timetable[day].length; hour++) { %>
-        <label for="<%= day %>-<%= hour %>"><%= hour %></label>
-        <input type="text" id="<%= day %>-<%= hour %>" name="<%= day %>[<%= hour %>]" value="<%= timetable[day][hour] %>">
-        <br>
-      <% } %>
-    <% } %>
+  <form action="/edit" method="POST" class="timetable-form">
+    <div class="timetable-container">
+      <div class="row">
+        <% for(let day in timetable) { %>
+          <% if (['Monday', 'Tuesday', 'Wednesday'].includes(day)) { %>
+            <div class="day-column">
+              <h2><%= day %></h2>
+              <% 
+              const times = ['8:00-9:00', '9:00-10:00', '10:00-11:00', '11:00-12:00', '12:00-13:00', '14:00-15:00'];
+              for(let hour = 0; hour < times.length; hour++) { %>
+                <label for="<%= day %>-<%= hour %>"><%= times[hour] %></label>
+                <input type="text" id="<%= day %>-<%= hour %>" name="<%= day %>[<%= hour %>]" value="<%= timetable[day][hour] %>">
+                <br>
+              <% } %>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+      <div class="row">
+        <% for(let day in timetable) { %>
+          <% if (['Thursday', 'Friday', 'Saturday', 'Sunday'].includes(day)) { %>
+            <div class="day-column">
+              <h2><%= day %></h2>
+              <% 
+              const times = ['8:00-9:00', '9:00-10:00', '10:00-11:00', '11:00-12:00', '13:00-14:00', '14:00-15:00'];
+              for(let hour = 0; hour < times.length; hour++) { %>
+                <label for="<%= day %>-<%= hour %>"><%= times[hour] %></label>
+                <input type="text" id="<%= day %>-<%= hour %>" name="<%= day %>[<%= hour %>]" value="<%= timetable[day][hour] %>">
+                <br>
+              <% } %>
+            </div>
+          <% } %>
+        <% } %>
+      </div>
+    </div>
     <button type="submit">Save Timetable</button>
     <input type="hidden" name="successMessage" value="Timetable saved successfully">
   </form>
