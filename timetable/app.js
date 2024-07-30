@@ -15,30 +15,28 @@ const subjects = {
 };
 
 app.use(bodyParser.urlencoded({ extended: true }));
-// ... (other imports and initializations)
-
 app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
-// Load initial data
+
 let timetable = JSON.parse(fs.readFileSync(dataFilePath, 'utf8'));
 
-// Route: Home Page (Display Timetable)
+
 app.get('/', (req, res) => {
   res.render('index', { timetable, successMessage: null });
 });
 
-// Route: Generate Random Timetable
+
 app.get('/generate', (req, res) => {
   timetable = generateRandomTimetable();
   fs.writeFileSync(dataFilePath, JSON.stringify(timetable, null, 2), 'utf8');
   res.redirect('/');
 });
 
-// Route: Edit Timetable
+
 app.post('/edit', (req, res) => {
   const newTimetable = req.body;
-  delete newTimetable.successMessage; // Remove the hidden input value
+  delete newTimetable.successMessage; 
 
   if (validateTimetable(newTimetable)) {
     timetable = newTimetable;
@@ -50,8 +48,6 @@ app.post('/edit', (req, res) => {
 });
 
 
-
-// Function: Generate Random Timetable
 function generateRandomTimetable() {
   const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'];
   const hoursPerDay = 6;
@@ -79,10 +75,32 @@ function generateRandomTimetable() {
   return newTimetable;
 }
 
-// Function: Validate Timetable (Basic Example)
+
 function validateTimetable(newTimetable) {
-  // Basic validation logic (you can expand this)
-  // Ensure each subject has the correct total number of hours
+ 
+  const subjectCount = {
+    Languages: 0,
+    Sciences: 0,
+    Arts: 0,
+    Sports: 0,
+  };
+
+
+  for (const day in newTimetable) {
+    newTimetable[day].forEach(subject => {
+      if (subject && subjectCount.hasOwnProperty(subject)) {
+        subjectCount[subject]++;
+      }
+    });
+  }
+
+  // Check if each subject meets its required hours
+  for (const subject in subjects) {
+    if (subjectCount[subject] !== subjects[subject]) {
+      return false;
+    }
+  }
+
   return true;
 }
 

@@ -1,26 +1,26 @@
 {
   "Monday": [
+    "Sciences",
     "Sports",
     "Languages",
-    "Languages",
     "Arts",
-    "Sciences",
-    "Sports"
+    "Languages",
+    "Sciences"
   ],
   "Tuesday": [
     "Sciences",
-    "Arts",
-    "Arts",
+    "Sports",
     "Languages",
-    "Sciences",
-    "Languages"
+    "Languages",
+    "Arts",
+    "Sciences"
   ],
   "Wednesday": [
+    "Languages",
+    "Sciences",
+    "Sciences",
     "Sciences",
     "Languages",
-    "Arts",
-    "Languages",
-    "Sports",
     "Sports"
   ],
   "Thursday": [
@@ -29,14 +29,14 @@
     "Sciences",
     "Languages",
     "Arts",
-    "Sciences"
+    "Sports"
   ],
   "Friday": [
-    "Sciences",
     "Languages",
     "Sciences",
+    "Arts",
     "Sports",
-    "Sciences",
-    "Languages"
+    "Languages",
+    "Arts"
   ]
 }
